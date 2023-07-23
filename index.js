@@ -28,14 +28,18 @@ function captura_foto() {
 }
 
 async function lerImg(file = captura_foto()){
-    const worker = await Tesseract.createWorker({
-      logger: m => console.log(m)
-    });
+    const spin = document.querySelector('#spin');
+    spin.style.visibility = 'visible'
 
+    const worker = await Tesseract.createWorker({
+        logger: m => console.log(m)
+    });
     await worker.loadLanguage('eng+por');
     await worker.initialize('eng+por');
     const { data: { text } } = await worker.recognize(file);
     console.log(text);
-    document.querySelector("#saida").value = text
+    document.querySelector("#saida").textContent = text
     await worker.terminate();
+    
+    spin.style.visibility = 'hidden'
 }
