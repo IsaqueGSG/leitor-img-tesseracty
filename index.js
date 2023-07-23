@@ -1,6 +1,6 @@
 
 
-navigator.mediaDevices.getUserMedia({video: true})
+navigator.mediaDevices.getUserMedia({video: {facingMode: "environment"}})
 .then(function (mediaStream) {
     const video = document.querySelector('#video');
     video.srcObject = mediaStream;
