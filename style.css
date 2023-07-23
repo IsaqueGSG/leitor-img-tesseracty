@@ -5,3 +5,7 @@
 #ler_imagem, #saida {
     font-size: 40px;
 }
+
+#saida {
+    width: 90%;
+}
