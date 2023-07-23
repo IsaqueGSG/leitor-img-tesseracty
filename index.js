@@ -34,8 +34,8 @@ async function lerImg(file = captura_foto()){
     const worker = await Tesseract.createWorker({
         logger: m => console.log(m)
     });
-    await worker.loadLanguage('por');
-    await worker.initialize('por');
+    await worker.loadLanguage('eng');
+    await worker.initialize('eng');
     await worker.setParameters({ tessedit_char_whitelist: '0123456789+-'});
     const { data: { text } } = await worker.recognize(file);
     console.log(text);
