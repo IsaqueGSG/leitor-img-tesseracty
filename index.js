@@ -36,6 +36,7 @@ async function lerImg(file = captura_foto()){
     });
     await worker.loadLanguage('por');
     await worker.initialize('por');
+    await worker.setParameters({ tessedit_char_whitelist: '0123456789+-'});
     const { data: { text } } = await worker.recognize(file);
     console.log(text);
     document.querySelector("#saida").textContent = text
