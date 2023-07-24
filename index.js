@@ -11,14 +11,17 @@ navigator.mediaDevices.getUserMedia({video: {facingMode: "environment"}})
 })
 
 var gray;
+var contraste;
 function toggle(){
     const btnToggle = document.getElementById('btnToggle');
 
     if(btnToggle.textContent == 'colorido'){
         gray = '1'
+        contraste = 1000
         btnToggle.textContent = 'preto e branco'
     }else if(btnToggle.textContent == 'preto e branco'){
         gray = '0'
+        contraste = 100
         btnToggle.textContent = 'colorido'
     }
 }
@@ -27,7 +30,7 @@ function captura_foto() {
     var canvas = document.querySelector("#canvas");  
     canvas.height = video.videoHeight;
     canvas.width = video.videoWidth;
-    canvas.style.filter = `grayscale(${gray})`
+    canvas.style.filter = `grayscale(${gray}) contrast(${contraste}%)`
     var context = canvas.getContext('2d');
     context.drawImage(video, 0, 0);
     var dataurl = canvas.toDataURL('image/png');
