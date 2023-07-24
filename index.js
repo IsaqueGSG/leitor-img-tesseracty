@@ -10,10 +10,24 @@ navigator.mediaDevices.getUserMedia({video: {facingMode: "environment"}})
     console.log('Não há permissões para acessar a webcam')
 })
 
+var gray;
+function toggle(){
+    const btnToggle = document.getElementById('btnToggle');
+
+    if(btnToggle.textContent == 'colorido'){
+        gray = '1'
+        btnToggle.textContent = 'preto e branco'
+    }else if(btnToggle.textContent == 'preto e branco'){
+        gray = '0'
+        btnToggle.textContent = 'colorido'
+    }
+}
+
 function captura_foto() {
     var canvas = document.querySelector("#canvas");  
     canvas.height = video.videoHeight;
     canvas.width = video.videoWidth;
+    canvas.style.filter = `grayscale(${gray})`
     var context = canvas.getContext('2d');
     context.drawImage(video, 0, 0);
     var dataurl = canvas.toDataURL('image/png');
