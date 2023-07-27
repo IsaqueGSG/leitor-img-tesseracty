@@ -30,10 +30,8 @@ function numberOnly(){
     const btnToggle = document.getElementById('btnToggleNumberOnly');
     if(btnToggle.textContent == 'somente numeros'){
         btnToggle.textContent = 'numeros e letras'
-        return false
     }else if(btnToggle.textContent == 'numeros e letras'){
         btnToggle.textContent = 'somente numeros'
-        return true
     }
 }
 
@@ -65,7 +63,9 @@ async function lerImg(file = captura_foto()){
     await worker.loadLanguage('eng+por');
     await worker.initialize('eng+por');
     
-    if (numberOnly()) await worker.setParameters({ tessedit_char_whitelist: '0123456789+-'});
+    if (document.getElementById('btnToggleNumberOnly').textContent == 'somente numeros'){
+        await worker.setParameters({ tessedit_char_whitelist: '0123456789+-'});
+    } 
     const { data: { text } } = await worker.recognize(file);
     console.log(text);
     document.querySelector("#saida").textContent = text
