@@ -12,8 +12,8 @@ navigator.mediaDevices.getUserMedia({video: {facingMode: "environment"}})
 
 var gray;
 var contraste;
-function toggle(){
-    const btnToggle = document.getElementById('btnToggle');
+function toggleGray(){
+    const btnToggle = document.getElementById('btnToggleGray');
 
     if(btnToggle.textContent == 'colorido'){
         gray = '1'
@@ -23,6 +23,17 @@ function toggle(){
         gray = '0'
         contraste = 100
         btnToggle.textContent = 'colorido'
+    }
+}
+
+function NumberOnly(){
+    const btnToggle = document.getElementById('btnToggleNumberOnly');
+    if(btnToggle.textContent == 'somente numeros'){
+        btnToggle.textContent = 'numeros e letras'
+        return false
+    }else if(btnToggle.textContent == 'numeros e letras'){
+        btnToggle.textContent = 'somente numeros'
+        return true
     }
 }
 
@@ -54,7 +65,7 @@ async function lerImg(file = captura_foto()){
     await worker.loadLanguage('eng+por');
     await worker.initialize('eng+por');
     
-    await worker.setParameters({ tessedit_char_whitelist: '0123456789+-'});
+    if (NumberOnly()) await worker.setParameters({ tessedit_char_whitelist: '0123456789+-'});
     const { data: { text } } = await worker.recognize(file);
     console.log(text);
     document.querySelector("#saida").textContent = text
