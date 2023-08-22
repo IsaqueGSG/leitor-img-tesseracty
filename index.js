@@ -1,6 +1,3 @@
-if (!("BarcodeDetector" in window)) {
-  alert("Barcode Detector is not supported by this browser.");
-}else{alert("compativel")}
 
 navigator.mediaDevices.getUserMedia({video: {facingMode: "environment"}})
 .then(function (mediaStream) {
